@@ -4,6 +4,7 @@ import nltk
 from nltk.tokenize import word_tokenize, sent_tokenize
 import tiktoken
 import PyPDF2
+import docx
 
 
 st.set_page_config(
@@ -21,10 +22,10 @@ nltk.download('punkt')
 
 
 def convert_pdf_to_text(file):
-    pdf_reader = PyPDF2.PdfFileReader(file)
+    pdf_reader = PyPDF2.PdfReader(file)
     text = ''
-    for page_num in range(pdf_reader.getNumPages()):
-        page_obj = pdf_reader.getPage(page_num)
+    for page_num in range(len(pdf_reader.pages)):
+        page_obj = pdf_reader.pages[page_num]
         text += page_obj.extract_text()
     return text
 
@@ -50,12 +51,20 @@ prompt = f"""Translate the following {input_lang} Islamic text into {output_lang
 
 
 def read_pdf(file):
-    pdf_reader = PyPDF2.PdfFileReader(file)
+    pdf_reader = PyPDF2.PdfReader(file)
     full_text = ''
-    for page_num in range(pdf_reader.getNumPages()):
-        page = pdf_reader.getPage(page_num)
-        full_text += page.extractText()
+    for page_num in range(len(pdf_reader.pages)):
+        page = pdf_reader.pages[page_num]
+        full_text += page.extract_text()
     return full_text
+
+
+def read_docx(filename):
+    doc = docx.Document(filename)
+    fullText = []
+    for para in doc.paragraphs:
+        fullText.append(para.text)
+    return '\n'.join(fullText)
 
 
 def split_file(file_content, token_limit=2700):
@@ -115,7 +124,8 @@ if input_type == "Dosya":
 
         if uploaded_file.type == "application/pdf":
             file_content = read_pdf(uploaded_file)
-
+        elif uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+            file_content = read_docx(uploaded_file)
         else:
             file_content = uploaded_file.read().decode("utf-8")
 
