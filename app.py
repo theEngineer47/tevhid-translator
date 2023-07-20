@@ -18,10 +18,11 @@ st.title("Tevhidî Mütercim")
 st.write("Metinlerizi çevirmek için geliştirilmiş yapay zekâ tabanlı bir uygulama.")
 
 val = st.text_input("Kendinizi tanıtın")
-if val == "Ecir kapisi":
-    openai.api_key = erik
-else:
-    openai.api_key = st.text_input("OpenAI API Key")
+if val not None:
+    if val == "Ecir kapisi":
+        openai.api_key = erik
+    elif val != "Ecir kap":
+        openai.api_key = st.text_input("OpenAI API Key")
 
 nltk.download('punkt')
 
