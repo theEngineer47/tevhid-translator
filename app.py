@@ -21,7 +21,9 @@ val = st.text_input("Kendinizi tanıtın")
 if val is not None:
     if val == st.secrets['tel']:
         openai.api_key = erik
-    elif val != st.secrets['tel']:
+    elif val == st.secrets['kiraz']:
+        openai.api_key = erik
+    elif val != st.secrets['tel'] or not st.secrets['kiraz']:
         openai.api_key = st.text_input("OpenAI API Key")
 
 nltk.download('punkt')
