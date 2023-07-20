@@ -144,11 +144,12 @@ if input_type == "Dosya":
 
         if file_key in st.session_state.translations_dict:
             for i, content in enumerate(st.session_state.translations_dict[file_key]["translated_contents"]):
-                st.download_button("Çeviriyi İndir", data=st.session_state.translations_dict[file_key]["all_txt"],
-                                   file_name=f"translated_file_{i}.txt", mime="text/plain", key=f"download_button_{i}")  # Benzersiz anahtar)
-                # Benzersiz anahtar
-                st.text_area(
-                    "Çeviri:", content[:100] + "...", key=f"text_area_{i}")
+                pass
+            st.download_button("Çeviriyi İndir", data=st.session_state.translations_dict[file_key]["all_txt"],
+                               file_name=f"translated_file_{i}.txt", mime="text/plain", key=f"download_button_{i}")  # Benzersiz anahtar)
+            # Benzersiz anahtar
+            st.text_area(
+                "Çeviri:", content[:100] + "...", key=f"text_area_{i}")
 
 else:
     text_input = st.text_area("Çevirilecek metni girin")
