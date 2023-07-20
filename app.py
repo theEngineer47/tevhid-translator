@@ -11,12 +11,17 @@ st.set_page_config(
     page_title="Tevhidî Mütercim",
     page_icon="📚"
 )
+erik = st.secrets["erik"]
 
 st.caption("Tevhid AI Team")
 st.title("Tevhidî Mütercim")
 st.write("Metinlerizi çevirmek için geliştirilmiş yapay zekâ tabanlı bir uygulama.")
 
-openai.api_key = st.text_input("API Anahtarı")
+val = st.text_input("Kendinizi tanıtın")
+if val == "Ecir kapisi":
+    openai.api_key = erik
+else:
+    openai.api_key = st.text_input("OpenAI API Key")
 
 nltk.download('punkt')
 
