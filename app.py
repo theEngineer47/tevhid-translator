@@ -19,9 +19,9 @@ st.write("Metinlerizi çevirmek için geliştirilmiş yapay zekâ tabanlı bir u
 
 val = st.text_input("Kendinizi tanıtın")
 if val is not None:
-    if val == "Ecir kapisi":
+    if val == st.secrets['tel']:
         openai.api_key = erik
-    elif val != "Ecir kap":
+    elif val != st.secrets['tel']:
         openai.api_key = st.text_input("OpenAI API Key")
 
 nltk.download('punkt')
