@@ -15,7 +15,7 @@ erik = st.secrets["erik"]
 
 st.caption("Tevhid AI Team")
 st.title("Tevhidî Mütercim")
-st.write("Metinlerizi çevirmek için geliştirilmiş yapay zekâ tabanlı bir uygulama.")
+st.write("Metinlerinizi çevirmek için geliştirilmiş yapay zekâ tabanlı bir uygulama.")
 
 val = st.text_input("Kendinizi tanıtın")
 if val is not None:
